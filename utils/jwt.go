@@ -8,12 +8,13 @@ import (
 	"github.com/megre/dto"
 )
 
-func GenerateJWTToken(email string, role dto.RoleType, jwtSecret string, expiry int) (token string, err error) {
+func GenerateJWTToken(email string, role dto.RoleType, accountID string, jwtSecret string, expiry int) (token string, err error) {
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"email":  email,
-		"role":   role,
-		"iat":    time.Now().Unix(),
-		"expiry": time.Now().Add(time.Minute * time.Duration(expiry)),
+		"email":      email,
+		"role":       role,
+		"account_id": accountID,
+		"iat":        time.Now().Unix(),
+		"expiry":     time.Now().Add(time.Minute * time.Duration(expiry)),
 	})
 
 	secret := []byte(jwtSecret)

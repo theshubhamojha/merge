@@ -10,11 +10,10 @@ import (
 	"github.com/megre/utils"
 )
 
-func AuthCheck(jwtSecret string) func(srv http.Handler) http.Handler {
+func AuthCheck(jwtSecret string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			authHeader := r.Header.Get("Authorization")
-
 			isValid, claims := isAuthHeaderValid(authHeader, jwtSecret)
 			if !isValid {
 				dto.SendAPIResponse(w,
@@ -27,12 +26,11 @@ func AuthCheck(jwtSecret string) func(srv http.Handler) http.Handler {
 				return
 			}
 
-			ctx := r.Context()
+			ctx := context.WithValue(r.Context(), role, claims["role"])
+			ctx = context.WithValue(ctx, email, claims["email"])
+			ctx = context.WithValue(ctx, accountID, claims["account_id"])
 
-			ctx = context.WithValue(ctx, "role", claims["role"])
-			ctx = context.WithValue(ctx, "email", claims["email"])
-
-			next.ServeHTTP(w, r)
+			next.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
 }

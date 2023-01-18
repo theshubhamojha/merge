@@ -122,7 +122,7 @@ func (service *accountService) LoginAccount(ctx context.Context, request dto.Log
 		return
 	}
 
-	token, jwtErr := utils.GenerateJWTToken(accountDetails.Email, accountDetails.Role, service.jwtSecret, service.jwtExpiry)
+	token, jwtErr := utils.GenerateJWTToken(accountDetails.Email, accountDetails.Role, accountDetails.ID, service.jwtSecret, service.jwtExpiry)
 	if jwtErr != nil {
 		err = &merrors.Error{
 			Message:   "error logging in user",
