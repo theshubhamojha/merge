@@ -26,9 +26,9 @@ func AuthCheck(jwtSecret string) func(http.Handler) http.Handler {
 				return
 			}
 
-			ctx := context.WithValue(r.Context(), role, claims["role"])
-			ctx = context.WithValue(ctx, email, claims["email"])
-			ctx = context.WithValue(ctx, accountID, claims["account_id"])
+			ctx := context.WithValue(r.Context(), dto.Role, claims["role"])
+			ctx = context.WithValue(ctx, dto.Email, claims["email"])
+			ctx = context.WithValue(ctx, dto.AccountID, claims["account_id"])
 
 			next.ServeHTTP(w, r.WithContext(ctx))
 		})

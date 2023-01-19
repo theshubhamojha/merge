@@ -12,6 +12,8 @@ const (
 	EmailAlreadyExist    ErrorCodeType = "00603"
 	EmailNotExist        ErrorCodeType = "00604"
 	IncorrectCredentials ErrorCodeType = "00605"
+	DataNotExist         ErrorCodeType = "00606"
+	OutOfStock           ErrorCodeType = "00606"
 )
 
 type Error struct {

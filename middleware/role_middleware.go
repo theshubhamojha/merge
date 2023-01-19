@@ -3,7 +3,6 @@ package middleware
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/jmoiron/sqlx"
@@ -32,12 +31,11 @@ func CheckAllowedRole(resource dto.ResourceIdentifier) func(http.Handler) http.H
 			var db *sqlx.DB = app.GetDB()
 
 			ctx := r.Context()
-			role := ctx.Value(role)
+			role := ctx.Value(dto.Role)
 
 			var data json.RawMessage
 			err := db.GetContext(ctx, &data, getConfigurationQuery, role)
 			if err != nil {
-				fmt.Println(err.Error())
 				dto.SendAPIResponse(w,
 					dto.APIResponse{
 						Message:   "something went wrong",
@@ -51,7 +49,6 @@ func CheckAllowedRole(resource dto.ResourceIdentifier) func(http.Handler) http.H
 			var roleConfiguration map[string]Configuration
 			err = json.Unmarshal(data, &roleConfiguration)
 			if err != nil {
-				fmt.Println(err.Error())
 				dto.SendAPIResponse(w,
 					dto.APIResponse{
 						Message:   "something went wrong",
@@ -90,6 +87,6 @@ func checkIsRoleAllowed(ctx context.Context, configuration map[string]Configurat
 		return resourceConfigs.Default == "allow"
 	}
 
-	accountId, _ := ctx.Value(accountID).(string)
+	accountId, _ := ctx.Value(dto.AccountID).(string)
 	return resourceType.Action == "allow" && !slices.Contains(resourceType.Exceptions, accountId)
 }

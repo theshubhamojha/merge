@@ -22,6 +22,7 @@ type Configurations struct {
 	PG_DB_NAME           string
 	JWT_EXPIRY           int
 	JWT_SECRET           string
+	DATA_PER_PAGE        int
 }
 
 // initaliseConfiguration will initialse the local environment from the file `config.yml`

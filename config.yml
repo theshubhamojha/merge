@@ -9,3 +9,5 @@ PG_DB_NAME: "merge"
 
 JWT_EXPIRY: 100
 JWT_SECRET: "secret"
+
+DATA_PER_PAGE: 1
