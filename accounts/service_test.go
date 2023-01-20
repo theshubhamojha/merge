@@ -171,6 +171,35 @@ func (suite *testSuite) TestLoginAccount() {
 		assert.Equal(t, response.Email, "shubham@gmail.com")
 	})
 
+	t.Run("when account is suspended", func(t *testing.T) {
+		suite.SetupTest()
+
+		request := dto.LoginRequest{
+			EmailID:  "shubham@gmail.com",
+			Password: "password",
+		}
+
+		sampleValidHash := "$2a$04$jWpmNTBZlHYFXah3DuBXNeU8i3HU1kZZNDSHn5rc2dhWNrNbuJBqG"
+		dbResponse := dto.Account{
+			ID:        "acc_123",
+			Name:      "shubham",
+			Email:     "shubham@gmail.com",
+			Password:  sampleValidHash,
+			Role:      "admin",
+			IsActive:  false,
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		}
+
+		suite.accountStoreMock.On("GetAccountDetailsByEmail", mock.Anything, "shubham@gmail.com").Return(dbResponse, nil)
+
+		accountService := accounts.NewAccountService(suite.jwtSecret, suite.jwtExpiry, suite.accountStoreMock)
+		_, err := accountService.LoginAccount(context.Background(), request)
+
+		assert.NotEqual(t, err, nil)
+		assert.Equal(t, err.ErrorCode, merrors.AccountSuspended)
+	})
+
 	t.Run("when the password is wrong", func(t *testing.T) {
 		suite.SetupTest()
 
