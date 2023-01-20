@@ -13,8 +13,6 @@ This will create all the required db tables
 https://api.postman.com/collections/23172320-bfc4c7e6-49e0-4d9a-8ccc-264ab14dd2b4?access_key=PMAT-01GQ6ZGXEQXQ9MKD9D5W5M6TR8
 
 Design document can be found here: https://www.notion.so/WIP-Merge-Design-Doc-0d9bad04685444ef8425f7150b94f560
-Please note that the doc is still work in progress mode, some formatting is going on
-
 
 <h1> Tests </h1>
 Please note that tests for some of the modules aren't written. Right now only accounts/service and utils tests are written
