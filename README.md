@@ -6,7 +6,7 @@ Pre-requisites: Docker
 1) Go inside the directory and run `docker-compose.yml up` command
 2) Once the images are pulled and build run the command `docker ps` to know about all the running containers.
 3) Get the container id for `merge_assignment` container and go inside it's terminal using `docker exec -it ${container_id} /bin/sh`
-4) Run the migrations: `migrate -source ./db/migrations -database postgres://postgres:5432/merge up`
+4) Inside the terminal of container `merge_assignment` run the migrations: `migrate -source ./db/migrations -database postgres://postgres:5432/merge up`
 This will create all the required db tables
 
 <h1> API Collections </h1>
