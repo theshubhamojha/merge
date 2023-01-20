@@ -17,4 +17,4 @@ Please note that the doc is still work in progress mode, some formatting is goin
 
 
 <h1> Tests </h1>
-Please note that all tests for all the modules aren't written. Right now only accounts/service tests are written
+Please note that tests for some of the modules aren't written. Right now only accounts/service and utils tests are written
