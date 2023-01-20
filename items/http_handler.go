@@ -24,7 +24,7 @@ func HandleAddItem(itemService ItemService) func(w http.ResponseWriter, r *http.
 		}
 
 		serviceError := request.ValidateRequest()
-		if err != nil {
+		if serviceError != nil {
 			dto.SendAPIResponse(w,
 				dto.APIResponse{
 					Message:   serviceError.Message,
@@ -54,6 +54,5 @@ func HandleAddItem(itemService ItemService) func(w http.ResponseWriter, r *http.
 			},
 			http.StatusOK,
 		)
-		return
 	}
 }
