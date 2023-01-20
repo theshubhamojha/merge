@@ -44,10 +44,11 @@ func initaliseConfiguration() {
 
 func initaliseDatabase() {
 	database, err := sqlx.Connect("postgres",
-		fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable",
+		fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
+			configuration.PG_DATABASE_USER_ID,
+			configuration.PG_DATABASE_PASSWORD,
 			configuration.PG_DATABASE_HOST,
 			configuration.PG_DATABASE_PORT,
-			configuration.PG_DATABASE_USER_ID,
 			configuration.PG_DB_NAME,
 		))
 	if err != nil {

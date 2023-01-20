@@ -1,4 +1,4 @@
-INSERT INTO configuations (id, configuation, "role", created_at, updated_at)
+INSERT INTO configurations (id, configuration, "role", created_at, updated_at)
   VALUES('1', '{
   "items": {
     "resources": {
@@ -18,7 +18,7 @@ INSERT INTO configuations (id, configuation, "role", created_at, updated_at)
 );
 
 
-INSERT INTO configuations (id, configuation, "role", created_at, updated_at)
+INSERT INTO configurations (id, configuration, "role", created_at, updated_at)
   VALUES('2', '{
     "items": {
       "resources": {

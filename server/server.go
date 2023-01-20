@@ -13,7 +13,7 @@ func StartHTTPServer() {
 
 	configuration := app.GetConfiguration()
 	srv := &http.Server{
-		Addr:    fmt.Sprintf("%s:%d", configuration.APP_HOST, configuration.APP_PORT),
+		Addr:    fmt.Sprintf(":%d", configuration.APP_PORT),
 		Handler: GetRouter(),
 	}
 
@@ -22,5 +22,5 @@ func StartHTTPServer() {
 		panic(fmt.Sprintf("error starting server, error: %s", err.Error()))
 	}
 
-	fmt.Println("successfully connected to the database")
+	fmt.Printf("successfully started server on: %s:%d", configuration.APP_HOST, configuration.APP_PORT)
 }

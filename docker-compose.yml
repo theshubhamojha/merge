@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+ postgres:
+  image: postgres:13.1-alpine
+  hostname: postgres
+  environment:
+   - POSTGRES_USER=postgres
+   - POSTGRES_PASSWORD=postgres
+   - POSTGRES_DB=merge
+  ports:
+   - 5432:5432
+
+ merge_assignment:
+  image: merge_assignment
+  build: . 
+  tty: true
+  restart: on-failure
+  ports:
+   - 8080:8080
+  depends_on:
+   - postgres

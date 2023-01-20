@@ -2,6 +2,7 @@ package accounts
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -11,6 +12,7 @@ import (
 
 func HandleCreateAccount(accountService AccountService) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("ddjdjdjd")
 		var request dto.CreateAccountRequest
 		err := json.NewDecoder(r.Body).Decode(&request)
 		if err != nil {
