@@ -37,7 +37,8 @@ func (service *cartServiceStorer) InsertCart(ctx context.Context, cartItem dto.C
 }
 
 func (service *cartServiceStorer) UpdateQuantity(ctx context.Context, cartID string, quantity int) (cart dto.Cart, err error) {
-	err = service.db.GetContext(ctx, &cart, updateCartQuantityQuery, cartID, quantity)
+	accountId := ctx.Value(dto.AccountID).(string)
+	err = service.db.GetContext(ctx, &cart, updateCartQuantityQuery, cartID, quantity, accountId)
 	return
 }
 

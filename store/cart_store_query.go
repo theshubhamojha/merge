@@ -14,7 +14,7 @@ const (
 
 	updateCartQuantityQuery = `UPDATE cart
 		SET quantity = $2, updated_at = now()
-		WHERE id = $1 AND is_deleted = FALSE
+		WHERE id = $1 AND is_deleted = FALSE AND account_id = $3
 		RETURNING id, account_id, quantity, item_id, updated_at, created_at
 	`
 
