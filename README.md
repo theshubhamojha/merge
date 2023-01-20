@@ -1,7 +1,7 @@
 # merge
 
 <h1> How to start the application </h1>
-Pre-equisites: Docker
+Pre-requisites: Docker
 
 1) Go inside the directory and run docker-compose up command
 2) Once the images are pulled and build run the command `docker ps` to know about all the running containers.
