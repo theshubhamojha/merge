@@ -113,6 +113,14 @@ func (service *accountService) LoginAccount(ctx context.Context, request dto.Log
 		return
 	}
 
+	if !accountDetails.IsActive {
+		err = &merrors.Error{
+			Message:   "account is suspended",
+			ErrorCode: merrors.AccountSuspended,
+		}
+		return
+	}
+
 	isCredentialValid := utils.VerifyHashSalt(ctx, request.Password, accountDetails.Password)
 	if !isCredentialValid {
 		err = &merrors.Error{
