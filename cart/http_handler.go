@@ -24,6 +24,18 @@ func HandleUpsertItemToCart(cartService CartService) func(w http.ResponseWriter,
 			return
 		}
 
+		serviceErr := request.ValidateRequest()
+		if serviceErr != nil {
+			dto.SendAPIResponse(w,
+				dto.APIResponse{
+					Message:   serviceErr.Message,
+					ErrorCode: serviceErr.ErrorCode,
+				},
+				http.StatusBadRequest,
+			)
+			return
+		}
+
 		accountID := r.Context().Value(dto.AccountID).(string)
 		quantity := request.Quantity
 		itemID := request.ItemId
