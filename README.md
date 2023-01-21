@@ -3,10 +3,10 @@
 <h1> How to start the application </h1>
 Pre-requisites: Docker
 
-1) Go inside the directory and run `docker compose up` command
+1) Go inside the directory and run `docker compose up -d` command. This will start the server in detached mode
 2) Once the images are pulled and built, run the command `docker ps` to know about all the running containers.
 3) Get the container id for `merge_assignment` container and go inside it's terminal using `docker exec -it ${container_id} /bin/sh`
-4) Inside the terminal of container `merge_assignment` run the migrations: `migrate -database postgres://postgres:postgres@postgres:5432/merge?sslmode=disable -path db/migrations up`
+4) Inside the terminal of container `merge_assignment` run the migrations: `migrate -database postgres://postgres:postgres@postgres:5432/merge?sslmode=disable -path db/migrations up`.
 This will create all the required db tables
 
 <h1> API Collections </h1>
